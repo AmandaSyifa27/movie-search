@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import APIRequest from "../apis/APIRequest";
+import { Layout, Menu, theme, Input } from "antd";
 import {
  MenuFoldOutlined,
  MenuUnfoldOutlined,
@@ -7,9 +9,8 @@ import {
  FireOutlined,
  LineChartOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, theme, Input } from "antd";
+import { SiThemoviedatabase } from "react-icons/si";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import APIRequest from "../apis/APIRequest";
 const { Header, Sider, Content } = Layout;
 
 const Layoute = ({ children }) => {
@@ -22,21 +23,28 @@ const Layoute = ({ children }) => {
  const handlePath = (path) => {
   navigate(path);
  };
- const [movies, setMovies] = useState();
 
- const handleSearch = async (value) => {
-  //   console.log(value);
-  const result = await APIRequest.getSearchCar(value);
-  if ((result.status = "200")) {
-   //    console.log(result);
-   setMovies(result.data.results);
-  }
- };
+ let mobileScreen = window.innerWidth;
+ if (mobileScreen < 767) console.log("halo");
+ console.log(window.innerWidth);
 
  return (
   <Layout className="layout">
    <Sider trigger={null} collapsible collapsed={collapsed}>
-    <div className="logo"></div>
+    <div
+     className="logo"
+     style={{
+      display: "flex",
+      justifyContent: "center",
+      padding: "0 4px 4px 4px",
+     }}
+    >
+     <SiThemoviedatabase
+      style={{
+       fontSize: "-webkit-xxx-large",
+      }}
+     />
+    </div>
     <Menu
      theme="dark"
      mode="inline"
@@ -80,12 +88,13 @@ const Layoute = ({ children }) => {
       className: "trigger",
       onClick: () => setCollapsed(!collapsed),
      })}
-     <Search
+     {/* <Search
       className="search-input"
       placeholder="input search text"
       allowClear
       onSearch={handleSearch}
-     />
+      //   result=
+     /> */}
     </Header>
 
     <Content>{children}</Content>

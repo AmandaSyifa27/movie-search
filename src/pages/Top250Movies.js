@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import APIRequest from "../apis/APIRequest";
-import { TrophyFilled, StarFilled } from "@ant-design/icons";
+import { TrophyFilled, StarFilled, SearchOutlined } from "@ant-design/icons";
 import Loading from "../components/Loading";
 import NoMovies from "../components/NoMovie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FloatButton } from "antd";
 
 const Top250Movies = () => {
  const [movies, setMovies] = useState([]);
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState(false);
+ const navigate = useNavigate();
 
  React.useEffect(() => {
   const fetchData = async () => {
@@ -40,16 +42,20 @@ const Top250Movies = () => {
           <strong>{movie.title}</strong>
           <span>{movie.year}</span>
           <p className="movie-rank">
+           Rank
            <TrophyFilled style={{ color: "goldenrod" }} />
            {movie.rank}
           </p>
           <p className="movie-rating">
+           Rating
            <StarFilled style={{ color: "gold" }} />
            {movie.imDbRating}
           </p>
          </div>
-         <div className="card-button">
-          <Link to={`/movie-detail/${movie.id}`}>Go To Detail Movie</Link>
+         <div>
+          <Link className="card-button" to={`/movie-detail/${movie.id}`}>
+           Go To Detail Movie
+          </Link>
          </div>
         </div>
        );
@@ -57,6 +63,8 @@ const Top250Movies = () => {
      )}
     </section>
    )}
+   <FloatButton icon={<SearchOutlined />} onClick={() => navigate("/")} />
+   <FloatButton.BackTop style={{ marginBottom: "60px" }} />
   </div>
  );
 };

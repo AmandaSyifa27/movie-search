@@ -1,4 +1,4 @@
-$primary-color: #001529;
+$main-color: #001529;
 $main: #607cb6;
 
 body {
@@ -68,9 +68,7 @@ body {
    align-items: center;
    justify-content: center;
    border-radius: 2px;
-   a {
-    color: beige;
-   }
+   color: beige;
   }
  }
 }
@@ -158,19 +156,32 @@ body {
 
  .trailer-container {
   margin-top: 30px;
+  .trailer {
+   position: relative;
+   width: 100%;
+   overflow: hidden;
+   padding-top: 56.25%;
+   .iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+   }
+  }
  }
 }
 
 // length = 0
-.empty-awards {
+.err {
  display: flex;
- justify-content: center;
- align-items: center;
  flex-direction: column;
- margin-top: 40px;
- color: $main;
- // color: $primary-color;
- svg {
+ align-items: center;
+ color: $main-color;
+ .err-svg {
   font-size: 50px;
  }
 }

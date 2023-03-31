@@ -3,10 +3,13 @@ import FullCasts from "../components/FullCasts";
 import MoviePosters from "../components/MoviePosters";
 import MovieTrailer from "../components/MovieTrailer";
 import MovieAwards from "../components/MovieAwards";
-import { Anchor, Col, Divider, Row } from "antd";
-// import { useLocation, useParams } from "react-router-dom";
+import { Anchor, Divider, FloatButton } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const MovieDetail = () => {
+ const navigate = useNavigate();
+
  return (
   <div className="detail-container container">
    <div
@@ -19,6 +22,7 @@ const MovieDetail = () => {
      style={{
       backgroundColor: "white",
       padding: "10px",
+      fontWeight: "600",
      }}
      direction="horizontal"
      items={[
@@ -58,12 +62,14 @@ const MovieDetail = () => {
     <Divider id="posters" orientation="left">
      Posters
     </Divider>
-    {/* <MoviePosters /> */}
+    <MoviePosters />
     <Divider id="awards" orientation="left">
      Awards
     </Divider>
     <MovieAwards />
    </div>
+   <FloatButton icon={<SearchOutlined />} onClick={() => navigate("/")} />
+   <FloatButton.BackTop style={{ marginBottom: "60px" }} />
   </div>
  );
 };

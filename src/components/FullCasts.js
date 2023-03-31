@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import APIRequest from "../apis/APIRequest";
-import { useParams } from "react-router-dom";
 import Loading from "./Loading";
-import { Tooltip } from "antd";
 import { MdOutlineNaturePeople } from "react-icons/md";
+import { Tooltip } from "antd";
+import { useParams } from "react-router-dom";
 
 const FullCasts = () => {
  const params = useParams();
  const [casts, setCasts] = useState([]);
- const [loading, setLoading] = useState(true);
  const [error, setError] = useState(false);
+ const [loading, setLoading] = useState(true);
 
  React.useEffect(() => {
   const fetchCasts = async (id) => {
@@ -23,23 +23,23 @@ const FullCasts = () => {
  }, [params.movieId]);
  return (
   <div className="fullcasts-container">
-   {error ? (
-    <div>
-     <MdOutlineNaturePeople />
-     <em>No Casts Found</em>
+   {/* {error ? (
+    <div
+     className="err"
+     style={{
+      width: "-webkit-fill-available",
+     }}
+    >
+     <MdOutlineNaturePeople className="err-svg" />
+     <em>No casts found, or it may be a server side error</em>
     </div>
    ) : (
     <>
-     {loading ? (
-      <Loading />
-     ) : (
+     {casts ? (
       casts.map((cast) => {
        return (
         <div className="card" key={cast.id}>
-         <Tooltip
-          // color="#607cb6"
-          title="web search"
-         >
+         <Tooltip title="web search">
           <a href={"https://www.google.com/search?q=" + cast.name}>
            {" "}
            <img src={cast.image} alt={cast.name} />
@@ -49,8 +49,27 @@ const FullCasts = () => {
         </div>
        );
       })
+     ) : (
+      <Loading />
      )}
     </>
+   )} */}
+   {loading ? (
+    <Loading />
+   ) : (
+    casts.map((cast) => {
+     return (
+      <div className="card" key={cast.id}>
+       <Tooltip title="web search">
+        <a href={"https://www.google.com/search?q=" + cast.name}>
+         {" "}
+         <img src={cast.image} alt={cast.name} />
+        </a>
+       </Tooltip>
+       <b>{cast.name}</b>
+      </div>
+     );
+    })
    )}
   </div>
  );

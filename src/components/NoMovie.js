@@ -3,9 +3,9 @@ import { TbMovieOff } from "react-icons/tb";
 
 const NoMovies = () => {
  return (
-  <div className="no-movies">
-   <TbMovieOff />
-   <em>No Movies Found</em>
+  <div className="err">
+   <TbMovieOff className="err-svg" />
+   <em>No movies found</em>
   </div>
  );
 };

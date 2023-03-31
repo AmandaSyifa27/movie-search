@@ -2,40 +2,61 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import APIRequest from "../apis/APIRequest";
 import Loading from "./Loading";
-import { message } from "antd";
+import { BsCameraVideoOffFill } from "react-icons/bs";
 
 const MovieTrailer = () => {
  const [trailer, setTrailer] = useState();
+ const [loading, setLoading] = useState(true);
  const params = useParams();
- const [messageApi, contextHolder] = message.useMessage();
+ const [error, setError] = useState(false);
 
  React.useEffect(() => {
   const fetchTrailer = async () => {
    const res = await APIRequest.getMovieTrailer(`${params.movieId}`);
    setTrailer(res.data);
-   console.log(res);
+   setLoading(false);
   };
   fetchTrailer().catch((error) => {
-   return messageApi.error("Failed to fetch video, Sorry😓");
+   setError(true);
   });
  }, [params.movieId]);
 
  return (
   <div className="trailer-container">
-   {contextHolder}
-   {trailer ? (
-    <div>
-     <iframe
-      width="1000px"
-      height="500px"
-      src={trailer.linkEmbed}
-      allowFullScreen
-      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      title={trailer.title}
-     />
+   {error ? (
+    <div className="err">
+     <BsCameraVideoOffFill className="err-svg" />
+     <em>No trailer, or it may be a server side error</em>
     </div>
    ) : (
-    <Loading />
+    <>
+     {loading ? (
+      <Loading />
+     ) : (
+      <div className="trailer">
+       <iframe
+        className="iframe"
+        src={trailer.linkEmbed}
+        allowFullScreen
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        title={trailer.title}
+       />
+      </div>
+     )}
+     {/* {trailer ? (
+      <div className="trailer">
+       <iframe
+        className="iframe"
+        src={trailer.linkEmbed}
+        allowFullScreen
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        title={trailer.title}
+       />
+      </div>
+     ) : (
+      <Loading />
+     )} */}
+    </>
    )}
   </div>
  );

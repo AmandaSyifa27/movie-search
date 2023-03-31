@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import APIRequest from "../apis/APIRequest";
-import { TrophyFilled } from "@ant-design/icons";
+import { FloatButton } from "antd";
 import Loading from "../components/Loading";
-import { message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import NoMovies from "../components/NoMovie";
-import { Link } from "react-router-dom";
+import { TrophyFilled, SearchOutlined } from "@ant-design/icons";
 
 const BoxOfficeMovies = () => {
  const [movies, setMovies] = useState([]);
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState(false);
+ const navigate = useNavigate();
 
  React.useEffect(() => {
   const fetchData = async () => {
@@ -25,7 +26,6 @@ const BoxOfficeMovies = () => {
  }, []);
  return (
   <div className=" box-container container">
-   {/* {contextHolder} */}
    {error ? (
     <NoMovies />
    ) : (
@@ -43,12 +43,15 @@ const BoxOfficeMovies = () => {
           <strong>{movie.title}</strong>
           <span>{movie.year}</span>
           <p className="movie-rank">
+           Rank:
            <TrophyFilled style={{ color: "goldenrod" }} />
            {movie.rank}
           </p>
          </div>
-         <div className="card-button">
-          <Link to={`/movie-detail/${movie.id}`}>Go To Detail Movie</Link>
+         <div>
+          <Link className="card-button" to={`/movie-detail/${movie.id}`}>
+           Go To Detail Movie
+          </Link>
          </div>
         </div>
        );
@@ -56,6 +59,8 @@ const BoxOfficeMovies = () => {
      )}
     </section>
    )}
+   <FloatButton icon={<SearchOutlined />} onClick={() => navigate("/")} />
+   <FloatButton.BackTop style={{ marginBottom: "60px" }} />
   </div>
  );
 };
