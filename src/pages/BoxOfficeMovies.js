@@ -17,19 +17,25 @@ const BoxOfficeMovies = () => {
    const res = await APIRequest.getBoxOfficeMovies();
    setMovies(res.data.items);
    setLoading(false);
+   if (res.data.items.length === 0) {
+    setError(true);
+   }
   };
   fetchData().catch((error) => {
    setLoading(false);
    setError(true);
-   console.log("gagal");
   });
  }, []);
  return (
   <div className=" box-container container">
+   <div className="tag">
+    <div />
+    <h1>Box Office Movies</h1>
+   </div>
    {error ? (
     <NoMovies />
    ) : (
-    <section className="cards">
+    <div className="cards">
      {loading ? (
       <Loading />
      ) : (
@@ -57,7 +63,7 @@ const BoxOfficeMovies = () => {
        );
       })
      )}
-    </section>
+    </div>
    )}
    <FloatButton icon={<SearchOutlined />} onClick={() => navigate("/")} />
    <FloatButton.BackTop style={{ marginBottom: "60px" }} />

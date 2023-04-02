@@ -1,4 +1,3 @@
-import React from "react";
 import axiosInstance from "../configs/axiosInstance";
 
 const APIKey = "k_bu997qze";
@@ -18,8 +17,6 @@ const APIRequest = {
  },
 
  getPopularMovies: async () => {
-  //   const result = await axiosInstance.get(`MostPopularMovies/${APIKey}`);
-  //   return result;
   try {
    const result = await axiosInstance.get(`/MostPopularMovies/${APIKey}`);
    return result;

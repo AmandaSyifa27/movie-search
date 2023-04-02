@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import APIRequest from "../apis/APIRequest";
-import { TrophyFilled, StarFilled, SearchOutlined } from "@ant-design/icons";
 import Loading from "../components/Loading";
 import NoMovies from "../components/NoMovie";
-import { Link, useNavigate } from "react-router-dom";
 import { FloatButton } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { TrophyFilled, StarFilled, SearchOutlined } from "@ant-design/icons";
 
 const Top250Movies = () => {
  const [movies, setMovies] = useState([]);
@@ -17,6 +17,9 @@ const Top250Movies = () => {
    const res = await APIRequest.getTop250Movies();
    setMovies(res.data.items);
    setLoading(false);
+   if (res.data.items.length === 0) {
+    setError(true);
+   }
   };
   fetchData().catch((error) => {
    setError(true);
@@ -25,10 +28,14 @@ const Top250Movies = () => {
 
  return (
   <div className="top250-container container">
+   <div className="tag">
+    <div />
+    <h1>Top 250 Movies</h1>
+   </div>
    {error ? (
     <NoMovies />
    ) : (
-    <section className="cards">
+    <di className="cards">
      {loading ? (
       <Loading />
      ) : (
@@ -61,7 +68,7 @@ const Top250Movies = () => {
        );
       })
      )}
-    </section>
+    </di>
    )}
    <FloatButton icon={<SearchOutlined />} onClick={() => navigate("/")} />
    <FloatButton.BackTop style={{ marginBottom: "60px" }} />

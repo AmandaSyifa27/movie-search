@@ -1,11 +1,11 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import BoxOfficeMovies from "../pages/BoxOfficeMovies";
 import Home from "../pages/Home";
+import MovieDetail from "../pages/MovieDetail";
 import Pages from "./pages";
 import PopularMovies from "../pages/PopularMovies";
 import Top250Movies from "../pages/Top250Movies";
-import BoxOfficeMovies from "../pages/BoxOfficeMovies";
-import MovieDetail from "../pages/MovieDetail";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 const SetupRouter = () => {
  return (

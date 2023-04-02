@@ -1,9 +1,9 @@
 import React from "react";
+import { Anchor, Divider, FloatButton } from "antd";
 import FullCasts from "../components/FullCasts";
 import MoviePosters from "../components/MoviePosters";
 import MovieTrailer from "../components/MovieTrailer";
 import MovieAwards from "../components/MovieAwards";
-import { Anchor, Divider, FloatButton } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -54,11 +54,11 @@ const MovieDetail = () => {
      Casts
     </Divider>
 
-    <FullCasts />
+    {/* <FullCasts /> */}
     <Divider id="trailer" orientation="left">
      Trailer
     </Divider>
-    <MovieTrailer />
+    {/* <MovieTrailer /> */}
     <Divider id="posters" orientation="left">
      Posters
     </Divider>
@@ -66,7 +66,7 @@ const MovieDetail = () => {
     <Divider id="awards" orientation="left">
      Awards
     </Divider>
-    <MovieAwards />
+    {/* <MovieAwards /> */}
    </div>
    <FloatButton icon={<SearchOutlined />} onClick={() => navigate("/")} />
    <FloatButton.BackTop style={{ marginBottom: "60px" }} />

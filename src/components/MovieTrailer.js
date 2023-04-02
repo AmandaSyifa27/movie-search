@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import APIRequest from "../apis/APIRequest";
-import Loading from "./Loading";
 import { BsCameraVideoOffFill } from "react-icons/bs";
+import Loading from "./Loading";
+import { useParams } from "react-router-dom";
 
 const MovieTrailer = () => {
  const [trailer, setTrailer] = useState();
@@ -15,6 +15,9 @@ const MovieTrailer = () => {
    const res = await APIRequest.getMovieTrailer(`${params.movieId}`);
    setTrailer(res.data);
    setLoading(false);
+   if (res.data.linkEmbed === null) {
+    setError(true);
+   }
   };
   fetchTrailer().catch((error) => {
    setError(true);
@@ -34,28 +37,17 @@ const MovieTrailer = () => {
       <Loading />
      ) : (
       <div className="trailer">
-       <iframe
-        className="iframe"
-        src={trailer.linkEmbed}
-        allowFullScreen
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        title={trailer.title}
-       />
+       <div className="iframe-container">
+        <iframe
+         className="iframe"
+         src={trailer.linkEmbed}
+         allowFullScreen
+         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+         title={trailer.title}
+        />
+       </div>
       </div>
      )}
-     {/* {trailer ? (
-      <div className="trailer">
-       <iframe
-        className="iframe"
-        src={trailer.linkEmbed}
-        allowFullScreen
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        title={trailer.title}
-       />
-      </div>
-     ) : (
-      <Loading />
-     )} */}
     </>
    )}
   </div>

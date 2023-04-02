@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import APIRequest from "../apis/APIRequest";
-import { StarFilled, TrophyFilled, SearchOutlined } from "@ant-design/icons";
 import Loading from "../components/Loading";
-import { Link, useNavigate } from "react-router-dom";
-import { FloatButton } from "antd";
 import NoMovies from "../components/NoMovie";
+import { FloatButton } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { StarFilled, TrophyFilled, SearchOutlined } from "@ant-design/icons";
 
 const PopularMovies = () => {
  const [movies, setMovies] = useState([]);
@@ -17,6 +17,9 @@ const PopularMovies = () => {
    const res = await APIRequest.getPopularMovies();
    setMovies(res.data.items);
    setLoading(false);
+   if (res.data.items.length === 0) {
+    setError(true);
+   }
   };
   fetchData().catch((error) => {
    setError(true);
@@ -24,10 +27,14 @@ const PopularMovies = () => {
  }, []);
  return (
   <div className="popular-container container">
+   <div className="tag">
+    <div />
+    <h1>Mot Popular Movies</h1>
+   </div>
    {error ? (
     <NoMovies />
    ) : (
-    <section className="cards">
+    <div className="cards">
      {loading ? (
       <Loading />
      ) : (
@@ -60,7 +67,7 @@ const PopularMovies = () => {
        );
       })
      )}
-    </section>
+    </div>
    )}
    <FloatButton icon={<SearchOutlined />} onClick={() => navigate("/")} />
    <FloatButton.BackTop style={{ marginBottom: "60px" }} />{" "}

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import APIRequest from "../apis/APIRequest";
+import React, { useEffect, useState } from "react";
 import { Layout, Menu, theme, Input } from "antd";
 import {
  MenuFoldOutlined,
@@ -10,13 +9,14 @@ import {
  LineChartOutlined,
 } from "@ant-design/icons";
 import { SiThemoviedatabase } from "react-icons/si";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 const { Header, Sider, Content } = Layout;
 
 const Layoute = ({ children }) => {
  const navigate = useNavigate();
- const { Search } = Input;
  const [collapsed, setCollapsed] = useState(false);
+ const [mobileScreen, setMobileScreen] = useState(false);
  const {
   token: { colorBgContainer },
  } = theme.useToken();
@@ -24,13 +24,24 @@ const Layoute = ({ children }) => {
   navigate(path);
  };
 
- let mobileScreen = window.innerWidth;
- if (mobileScreen < 767) console.log("halo");
- console.log(window.innerWidth);
+ useEffect(() => {
+  const handleResize = () => {
+   if (window.innerWidth < 700) {
+    setMobileScreen(true);
+    setCollapsed(true);
+   } else {
+    setMobileScreen(false);
+    setCollapsed(false);
+   }
+  };
+
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+ }, []);
 
  return (
   <Layout className="layout">
-   <Sider trigger={null} collapsible collapsed={collapsed}>
+   <Sider trigger={null} collapsible collapsed={collapsed} breakpoint="md">
     <div
      className="logo"
      style={{
@@ -88,13 +99,6 @@ const Layoute = ({ children }) => {
       className: "trigger",
       onClick: () => setCollapsed(!collapsed),
      })}
-     {/* <Search
-      className="search-input"
-      placeholder="input search text"
-      allowClear
-      onSearch={handleSearch}
-      //   result=
-     /> */}
     </Header>
 
     <Content>{children}</Content>
