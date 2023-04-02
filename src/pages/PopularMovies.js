@@ -29,7 +29,7 @@ const PopularMovies = () => {
   <div className="popular-container container">
    <div className="tag">
     <div />
-    <h1>Mot Popular Movies</h1>
+    <h1>Most Popular Movies</h1>
    </div>
    {error ? (
     <NoMovies />
