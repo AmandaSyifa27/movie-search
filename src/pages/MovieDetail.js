@@ -54,11 +54,11 @@ const MovieDetail = () => {
      Casts
     </Divider>
 
-    {/* <FullCasts /> */}
+    <FullCasts />
     <Divider id="trailer" orientation="left">
      Trailer
     </Divider>
-    {/* <MovieTrailer /> */}
+    <MovieTrailer />
     <Divider id="posters" orientation="left">
      Posters
     </Divider>
@@ -66,7 +66,7 @@ const MovieDetail = () => {
     <Divider id="awards" orientation="left">
      Awards
     </Divider>
-    {/* <MovieAwards /> */}
+    <MovieAwards />
    </div>
    <FloatButton icon={<SearchOutlined />} onClick={() => navigate("/")} />
    <FloatButton.BackTop style={{ marginBottom: "60px" }} />
