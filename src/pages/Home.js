@@ -1,8 +1,8 @@
 import { FloatButton, Input } from "antd";
 import React, { useState } from "react";
 import APIRequest from "../apis/APIRequest";
+import Search from "../assets/Search.svg";
 import Loading from "../components/Loading";
-import { FcSearch } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import NoMovies from "../components/NoMovie";
 
@@ -13,11 +13,10 @@ const Home = () => {
  const [error, setError] = useState(false);
 
  const handleSearch = async (value) => {
+  setLoading(true);
   if (value.length === 0) {
    return;
   }
-
-  setLoading(true);
 
   const result = await APIRequest.getSearchCar(value);
   if (result.data.results.length > 0) {
@@ -84,11 +83,7 @@ const Home = () => {
         fontWeight: "500",
        }}
       >
-       <FcSearch
-        style={{
-         fontSize: "100px",
-        }}
-       />
+       <img src={Search} alt="Search img" style={{ width: "60%" }} />
        <p>Search movies</p>
       </div>
      )}

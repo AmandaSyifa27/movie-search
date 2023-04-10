@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import APIRequest from "../apis/APIRequest";
+import ErrorCast from "../assets/NoCasts.svg";
 import Loading from "./Loading";
-import { MdOutlineNaturePeople } from "react-icons/md";
 import { Tooltip } from "antd";
 import { useParams } from "react-router-dom";
 
@@ -34,7 +34,7 @@ const FullCasts = () => {
       width: "-webkit-fill-available",
      }}
     >
-     <MdOutlineNaturePeople className="err-svg" />
+     <img src={ErrorCast} alt="Cast Not Found" />
      <em>No casts found, or it may be a server side error</em>
     </div>
    ) : (

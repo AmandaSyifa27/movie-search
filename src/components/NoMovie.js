@@ -1,10 +1,10 @@
 import React from "react";
-import { TbMovieOff } from "react-icons/tb";
+import NoMovie from "../assets/NoData.svg";
 
 const NoMovies = () => {
  return (
   <div className="err">
-   <TbMovieOff className="err-svg" />
+   <img src={NoMovie} alt="No Movie Found" />
    <em>No movies found, or it may be a server side error</em>
   </div>
  );

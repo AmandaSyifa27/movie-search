@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import APIRequest from "../apis/APIRequest";
-import { BsCameraVideoOffFill } from "react-icons/bs";
+import ErrorTrailer from "../assets/NoTrailer.svg";
 import Loading from "./Loading";
 import { useParams } from "react-router-dom";
 
@@ -15,6 +15,7 @@ const MovieTrailer = () => {
    const res = await APIRequest.getMovieTrailer(`${params.movieId}`);
    setTrailer(res.data);
    setLoading(false);
+   console.log(res);
    if (res.data.linkEmbed === null) {
     setError(true);
    }
@@ -25,10 +26,15 @@ const MovieTrailer = () => {
  }, [params.movieId]);
 
  return (
-  <div className="trailer-container">
+  <div
+   className="trailer-container"
+   style={{
+    paddingBottom: trailer ? "56.25%" : "0",
+   }}
+  >
    {error ? (
     <div className="err">
-     <BsCameraVideoOffFill className="err-svg" />
+     <img src={ErrorTrailer} alt="No Trailer Found" />
      <em>No trailer, or it may be a server side error</em>
     </div>
    ) : (

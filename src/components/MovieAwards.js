@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import APIRequest from "../apis/APIRequest";
 import { Collapse, Divider } from "antd";
+import ErrorAward from "../assets/NoAwards.svg";
 import Loading from "./Loading";
-import { TbTrophyOff } from "react-icons/tb";
 import { useParams } from "react-router-dom";
 
 const MovieAwards = () => {
@@ -30,7 +30,7 @@ const MovieAwards = () => {
   <div className="awards-container">
    {error ? (
     <div className="err">
-     <TbTrophyOff className="err-svg" />
+     <img src={ErrorAward} alt="Award Not Found" />
      <em>No awards, or it may be a server side error</em>
     </div>
    ) : (
