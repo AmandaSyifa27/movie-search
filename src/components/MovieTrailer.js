@@ -15,7 +15,6 @@ const MovieTrailer = () => {
    const res = await APIRequest.getMovieTrailer(`${params.movieId}`);
    setTrailer(res.data);
    setLoading(false);
-   console.log(res);
    if (res.data.linkEmbed === null) {
     setError(true);
    }

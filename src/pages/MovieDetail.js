@@ -17,6 +17,7 @@ const MovieDetail = () => {
   const fetchTitle = async () => {
    const res = await APIRequest.getMovieTrailer(`${params.movieId}`);
    setTitle(res.data.title);
+   console.log(res);
   };
   fetchTitle();
  }, [params.movieId]);

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import APIRequest from "../apis/APIRequest";
 import ErrorCast from "../assets/NoCasts.svg";
+import { IoIosArrowDropdown } from "react-icons/io";
 import Loading from "./Loading";
 import { Tooltip } from "antd";
 import { useParams } from "react-router-dom";
@@ -10,6 +11,7 @@ const FullCasts = () => {
  const [casts, setCasts] = useState();
  const [error, setError] = useState(false);
  const [loading, setLoading] = useState(true);
+ const [visibleItems, setVisibleItems] = useState(5);
 
  React.useEffect(() => {
   const fetchCasts = async (id) => {
@@ -24,6 +26,10 @@ const FullCasts = () => {
    setError(true);
   });
  }, [params.movieId]);
+
+ const handleLoadMore = () => {
+  setVisibleItems(visibleItems + 5);
+ };
 
  return (
   <div className="fullcasts-container">
@@ -43,20 +49,32 @@ const FullCasts = () => {
       <Loading />
      ) : (
       <>
-       {casts.map((cast) => {
-        return (
-         <div className="card" key={cast.id}>
-          <Tooltip title="web search">
-           <a href={"https://www.google.com/search?q=" + cast.name}>
-            {" "}
-            <img src={cast.image} alt={cast.name} />
-           </a>
-          </Tooltip>
-          <b>{cast.name}</b>
-          <em>- {cast.asCharacter} -</em>
-         </div>
-        );
-       })}
+       <div className="cast-cards">
+        {casts.slice(0, visibleItems).map((cast) => {
+         return (
+          <div className="card" key={cast.id}>
+           <Tooltip title="web search">
+            <a href={"https://www.google.com/search?q=" + cast.name}>
+             {" "}
+             <img src={cast.image} alt={cast.name} />
+            </a>
+           </Tooltip>
+           <b>{cast.name}</b>
+           <em>{cast.asCharacter}</em>
+          </div>
+         );
+        })}
+       </div>
+       <div className="load-more">
+        {visibleItems < casts.length && (
+         <>
+          <button onClick={handleLoadMore}>
+           <IoIosArrowDropdown />
+          </button>
+          <p>Show more</p>
+         </>
+        )}
+       </div>
       </>
      )}
     </>

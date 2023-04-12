@@ -58,7 +58,7 @@ const NotFoundPage = () => {
      <IoIosRefresh
       style={{
        marginLeft: "5px",
-       marginBottom: "-3px",
+       marginBottom: "-1px",
        color: "#607cb6",
       }}
      />
