@@ -44,7 +44,7 @@ const NotFoundPage = () => {
      }}
     >
      <BiLeftArrowAlt />
-     Back to Home
+     Back to Search Page
     </Link>
     <div
      onClick={() => window.location.reload(false)}
