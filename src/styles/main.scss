@@ -175,9 +175,12 @@ body {
   .panel-title {
    color: #5d5d5d;
    font-weight: 600;
-   .collapse2 {
-    color: #b69c9d !important;
+   ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     font-weight: 500;
+    margin: 0;
    }
   }
  }

@@ -6,7 +6,7 @@ import Loading from "./Loading";
 import { useParams } from "react-router-dom";
 
 const MovieAwards = () => {
- const [awards, setAwards] = useState();
+ const [awards, setAwards] = useState([]);
  const [error, setError] = useState(false);
  const [loading, setLoading] = useState(true);
  const params = useParams();
@@ -20,11 +20,14 @@ const MovieAwards = () => {
    if (res.data.items.length === 0) {
     setError(true);
    }
+   console.log(res);
   };
   fetchAwards().catch((error) => {
    setError(true);
   });
  }, [params.movieId]);
+
+ console.log(awards);
 
  return (
   <div className="awards-container">
@@ -38,31 +41,19 @@ const MovieAwards = () => {
      {loading ? (
       <Loading />
      ) : (
+      awards &&
       awards.map((award) => {
        return (
         <Collapse size="large">
-         <Panel
-          className="panel-title"
-          header={`${award.eventTitle} ${award.eventYear}`}
-         >
-          {award.outcomeItems.map((outcome) => {
-           return (
-            <div>
-             <Divider orientation="left">{outcome.outcomeCategory}</Divider>
-             <Collapse ghost className="collapse2">
-              <Panel header={outcome.outcomeTitle}>
-               <div>
-                <ul>
-                 {outcome.outcomeDetails.map((detail) => {
-                  return <li>{detail.plainText}</li>;
-                 })}
-                </ul>
-               </div>
-              </Panel>
-             </Collapse>
-            </div>
-           );
-          })}
+         <Panel className="panel-title" header={`${award.eventTitle}`}>
+          <div>
+           <ul>
+            {award.awardEventDetails &&
+             award.awardEventDetails.map((eventDetail) => {
+              return <li>{eventDetail.title}</li>;
+             })}
+           </ul>
+          </div>
          </Panel>
         </Collapse>
        );

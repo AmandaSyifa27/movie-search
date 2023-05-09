@@ -35,7 +35,7 @@ const Top250Movies = () => {
    {error ? (
     <NoMovies />
    ) : (
-    <di className="cards">
+    <div className="cards">
      {loading ? (
       <Loading />
      ) : (
@@ -68,7 +68,7 @@ const Top250Movies = () => {
        );
       })
      )}
-    </di>
+    </div>
    )}
    <FloatButton icon={<SearchOutlined />} onClick={() => navigate("/")} />
    <FloatButton.BackTop style={{ marginBottom: "60px" }} />
